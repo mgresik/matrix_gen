@@ -1,0 +1,14 @@
+Command:
+--rows
+--cols
+--noise-min
+--noise-max
+--noise-type
+--noise-std
+--spike-value
+--spike-density
+--max-spike-width
+--format
+--output
+--seed
+--memory-efficient
