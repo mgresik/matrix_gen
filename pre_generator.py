@@ -13,15 +13,18 @@ def generate_spike_pattern(col_len, spike_count, max_spike_width=4):
     :param spike_count: counter of spikes
     :param max_spike_width: maximal widht of spikes
     """
-    
     spikes = np.zeros(col_len, dtype=bool)  # Create a column with 0-value bool(false)
-    
+    last_value = np.int64(0)
     for _ in range(spike_count):
         # Random point to start spike
         start_pos = np.random.randint(0, col_len - max_spike_width + 1)
         # Random spike width (1-4 points)
         width = np.random.randint(1, max_spike_width + 1)
-        spikes[start_pos:start_pos + width] = True  # state true in point of column
+        if start_pos + width <= last_value:
+            spikes[start_pos] = False  # state true in point of column
+        else :
+            spikes[start_pos:start_pos + width] = True  # state true in point of column
+            last_value = start_pos + width
         
         # Add the probability of a very large spike (8-12 points)
         # if np.random.random() < 0.05:  # 5% probability
